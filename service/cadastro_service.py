@@ -20,3 +20,9 @@ class CadastroService:
         aluno = Aluno(id=novo_id, nome=nome, email=email)
         self.aluno_repository.salvar(aluno)
         return aluno
+
+    def cadastrar_turma(self, nome: str, semestre: int, ano: int, disciplina: str):
+        novo_id: int = len(self.turma_repository.listar_todos()) + 1
+        turma = Turma(id=novo_id, nome=nome, semestre=semestre, ano=ano, disciplina=disciplina)
+        self.turma_repository.salvar(turma)
+        return turma
