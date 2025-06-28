@@ -1,5 +1,5 @@
 from model.professor import Professor
-from typing import List, Optional
+from typing import List
 
 
 def exibir_professor(professor: Professor) -> None:
