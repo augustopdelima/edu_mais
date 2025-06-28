@@ -1,33 +1,30 @@
-from model.coordenador import Coordenador
+
 from typing import List
+from model.coordenador import Coordenador
 
 
-def exibir_coordenador(coordenador: Coordenador):
-    print("=== Coordenador ===")
-    print(f"ID: {coordenador.id}")
+def exibir_coordenador(coordenador: Coordenador) -> None:
+    print("=== Detalhes do Coordenador ===")
+    print(f"ID: {getattr(coordenador, 'id', 'N/A')}")
     print(f"Nome: {coordenador.nome}")
     print(f"Email: {coordenador.email}")
-    print("===================\n")
-
-
-def listar_coordenadores(coordenadores: List[Coordenador]):
-    print("=== Lista de Coordenadores ===")
-    for c in coordenadores:
-        print(f"[{c.id}] {c.nome} <{c.email}>")
     print("==============================\n")
 
 
-def exibir_coordenador_nao_encontrado(id: int):
+def listar_coordenadores(coordenadores: List[Coordenador]) -> None:
+    print("=== Lista de Coordenadores ===")
+    for c in coordenadores:
+        print(f"[{getattr(c, 'id', 'N/A')}] {c.nome} - {c.email}")
+    print("=============================\n")
+
+
+def exibir_coordenador_nao_encontrado(id: int) -> None:
     print(f"Coordenador com ID {id} não encontrado.\n")
 
 
-def solicitar_dados_coordenador():
-    print("=== Cadastro de Coordenador ===")
-    nome = input("Nome do coordenador: ").strip()
-    email = input("Email do coordenador: ").strip()
-    return nome, email
+def mostrar_mensagem_sucesso(mensagem: str) -> None:
+    print(f"Sucesso: {mensagem}\n")
 
 
-def mostrar_mensagem_sucesso(coordenador: Coordenador):
-    print(
-        f"Coordenador '{coordenador.nome}' cadastrado com sucesso! (ID: {coordenador.id})\n")
+def mostrar_mensagem_erro(mensagem: str) -> None:
+    print(f"Erro: {mensagem}\n")

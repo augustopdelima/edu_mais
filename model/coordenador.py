@@ -1,4 +1,6 @@
 class Coordenador:
-    def __init__(self, nome: str, email: str):
+    def __init__(self, id: int, nome: str, email: str, senha: str):
+        self.id = id
         self.nome = nome
         self.email = email
+        self.senha = senha

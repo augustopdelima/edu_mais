@@ -1,19 +1,22 @@
-from model.disciplina import Disciplina
 from typing import List, Optional
+from model.disciplina import Disciplina
 
 
 class DisciplinaRepository:
-    def __init__(self) -> None:
-        self.disciplinas: List[Disciplina] = []
 
-    def salvar(self, aluno: Disciplina) -> None:
-        self.disciplinas.append(aluno)
+    def __init__(self):
+        self.disciplinas = list[Disciplina]
+
+    def salvar(self, disciplina: Disciplina) -> None:
+        print(f"[Repositório] Salvando disciplina: {disciplina.nome}")
 
     def listar_todos(self) -> List[Disciplina]:
-        return self.disciplinas
+        print("[Repositório] Listando todas as disciplinas")
+        return []
 
     def buscar_por_id(self, id: int) -> Optional[Disciplina]:
-        for disciplina in self.disciplinas:
-            if disciplina.id == id:
-                return disciplina
+        print(f"[Repositório] Buscando disciplina pelo ID: {id}")
         return None
+
+    def deletar(self, id: int) -> None:
+        print(f"[Repositório] Deletando disciplina com ID: {id}")

@@ -1,26 +1,34 @@
-from service.cadastro_service import CadastroService
-from repository.turma_repository import TurmaRepository
-from view.cadastro_turma_view import exibir_turma, listar_turmas, exibir_turma_nao_encontrada, mostrar_mensagem_sucesso, solicitar_dados_turma
+from service.turma_service import TurmaService
+from view.turma_view import (
+    exibir_turma,
+    listar_turmas,
+    exibir_turma_nao_encontrada,
+    mostrar_mensagem_sucesso
+)
+
+from model.disciplina import Disciplina
 
 
 class TurmaController:
-    def __init__(self):
-        self.turma_repository = TurmaRepository()
-        self.cadastro_service = CadastroService(
-            turma_repository=self.turma_repository)
+    def __init__(self, turma_service: TurmaService):
+        print("[Controlador] Inicializando TurmaController")
+        self.turma_service = turma_service
 
-    def cadastrar_turma_interativo(self):
-        nome, ano, semestre, disciplina = solicitar_dados_turma()
-        turma = self.cadastro_service.cadastrar_turma(
-            nome, ano, semestre, disciplina)
-        mostrar_mensagem_sucesso(turma)
+    def cadastrar_turma(self, nome: str, ano: int, semestre: int, disciplina: Disciplina, alunos: list = None) -> None:
+        print("[Controlador] Cadastrando turma")
+        turma = self.turma_service.cadastrar_turma(
+            nome, ano, semestre, disciplina, alunos)
+        mostrar_mensagem_sucesso(
+            f"Turma '{turma.nome}' cadastrada com sucesso! (ID: {turma.id})")
 
-    def listar_turmas(self):
-        turmas = self.cadastro_service.listar_turmas()
+    def listar_turmas(self) -> None:
+        print("[Controlador] Listando turmas")
+        turmas = self.turma_service.listar_turmas()
         listar_turmas(turmas)
 
-    def buscar_turma_por_id(self, id: int):
-        turma = self.cadastro_service.buscar_turma_por_id(id)
+    def mostrar_turma_por_id(self, id: int) -> None:
+        print(f"[Controlador] Mostrando turma ID {id}")
+        turma = self.turma_service.buscar_turma_por_id(id)
         if turma:
             exibir_turma(turma)
         else:
