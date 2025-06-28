@@ -2,6 +2,7 @@ from model.professor import Professor
 from model.aluno import Aluno
 from model.disciplina import Disciplina
 from model.turma import Turma
+from model.coordenador import Coordenador
 from repository.professor_repository import ProfessorRepository
 from repository.aluno_repository import AlunoRepository
 from repository.disciplina_repository import DisciplinaRepository
@@ -15,11 +16,13 @@ class CadastroService:
         professor_repository: ProfessorRepository = None,
         disciplina_repository: DisciplinaRepository = None,
         turma_repository: TurmaRepository = None,
+        coordenadores=[],
     ):
         self.aluno_repository = aluno_repository or AlunoRepository()
         self.professor_repository = professor_repository or ProfessorRepository()
         self.disciplinas = disciplina_repository or DisciplinaRepository()
         self.turma_repository = turma_repository or TurmaRepository()
+        self.coordenadores = []
 
     def cadastrar_professor(self, nome: str, email: str):
         novo_id = len(self.professor_repository.listar_todos()) + 1
@@ -44,5 +47,11 @@ class CadastroService:
         novo_id = len(self.disciplinas.listar_todos()) + 1
         disciplina = Disciplina(id=novo_id, nome=nome,
                                 descricao=descricao, semestre=semestre)
-        self.disciplinas.append(disciplina)
+        self.disciplinas.salvar(disciplina)
         return disciplina
+
+    def cadastrar_coordenador(self, nome: str, email: str):
+        novo_id = len(self.coordenadores)+1,
+        coordenador = Coordenador(id=novo_id, nome=nome, email=email)
+        self.coordenadores.append(coordenador)
+        return coordenador
