@@ -1,4 +1,4 @@
-from model.professor import Aluno
+from model.aluno import Aluno
 from typing import List
 
 

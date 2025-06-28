@@ -1,16 +1,19 @@
 from service.cadastro_service import CadastroService
 from view.aluno_view import exibir_aluno, listar_alunos, exibir_aluno_nao_encontrado
+from view.cadastro_aluno_view import mostrar_mensagem_sucesso, solicitar_dados_aluno
 from repository.aluno_repository import AlunoRepository
 
 
 class AlunoController:
     def __init__(self):
-        self.cadastro_service = CadastroService()
         self.aluno_repository = AlunoRepository()
+        self.cadastro_service = CadastroService(
+            aluno_repository=self.aluno_repository)
 
-    def cadastrar_aluno(self, nome: str, email: str):
+    def cadastrar_aluno(self):
+        nome, email = solicitar_dados_aluno()
         aluno = self.cadastro_service.cadastrar_aluno(nome, email)
-        exibir_aluno(aluno)
+        mostrar_mensagem_sucesso(aluno=aluno)
 
     def listar_aluno(self):
         alunos = self.aluno_repository.listar_todos()
