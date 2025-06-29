@@ -1,18 +1,17 @@
-# controller/formulario_controller.py
-from typing import Optional, List
-from model.formulario import Formulario
+from typing import List
+# Representa as dependências que formulário tem de outros models/repositores, pode ser visto no diagrama de componentes
 from model.disciplina import Disciplina
 from model.turma import Turma
 from model.coordenador import Coordenador
 from model.professor import Professor
 from model.questao import Questao
+#
 from service.formulario_service import FormularioService
 from view.formulario_view import (
     exibir_formulario,
     listar_formularios,
     exibir_formulario_nao_encontrado,
     mostrar_mensagem_sucesso,
-    mostrar_mensagem_erro
 )
 
 
