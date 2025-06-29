@@ -1,19 +1,17 @@
-from model.turma import Turma
 from typing import List, Optional
+from model.turma import Turma
 
 
 class TurmaRepository:
-    def __init__(self) -> None:
+    def __init__(self):
         self.turmas: List[Turma] = []
 
     def salvar(self, turma: Turma) -> None:
+        print(f"[Repositório] Salvando turma ID {turma.id}")
         self.turmas.append(turma)
 
     def listar_todos(self) -> List[Turma]:
-        return self.turmas
+        print("[Repositório] Listando todas as turmas")
 
     def buscar_por_id(self, id: int) -> Optional[Turma]:
-        for turma in self.turmas:
-            if turma.id == id:
-                return turma
-        return None
+        print(f"[Repositório] Buscando turma pelo ID {id}")
