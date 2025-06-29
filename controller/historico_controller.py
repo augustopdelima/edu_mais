@@ -1,3 +1,6 @@
+from model.usuario import Usuario
+from security.permissao import Permissao
+from security.validador_permissao import validar_permissao
 from service.historico_service import HistoricoAvaliacaoService
 from view.historico_view import exibir_historico, listar_historicos, exibir_historico_nao_encontrado
 from model.professor import Professor
@@ -9,14 +12,20 @@ class HistoricoAvaliacaoController:
     def __init__(self, service: HistoricoAvaliacaoService):
         self.service = service
 
-    def gerar_para_professor(self, professor: Professor, avaliacoes: list[Avaliacao]):
+    def gerar_para_professor(self, usuario: Usuario, avaliacoes: list[Avaliacao]):
+
+        validar_permissao(usuario, [Permissao.PROFESSOR])
+
         historico = self.service.gerar_historico_professor(
-            professor, avaliacoes)
+            usuario, avaliacoes)
         exibir_historico(historico)
 
-    def gerar_para_coordenador(self, coordenador: Coordenador, avaliacoes: list[Avaliacao]):
+    def gerar_para_coordenador(self, usuario: Usuario, avaliacoes: list[Avaliacao]):
+
+        validar_permissao(usuario, [Permissao.COORDENADOR])
+
         historico = self.service.gerar_historico_coordenador(
-            coordenador, avaliacoes)
+            usuario, avaliacoes)
         exibir_historico(historico)
 
     def listar_todos(self):

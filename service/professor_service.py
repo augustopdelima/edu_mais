@@ -9,10 +9,10 @@ class ProfessorService:
         print("[Serviço] Inicializando ProfessorService")
         self.professor_repository = professor_repository
 
-    def cadastrar_professor(self, nome: str, email: str) -> Professor:
+    def cadastrar_professor(self, nome: str, email: str, senha: str) -> Professor:
         print(f"[Serviço] Cadastrando professor: {nome}")
         # Retorna um dummy para exemplo
-        return Professor(1, nome, email)
+        return Professor(1, nome, email, senha)
 
     def listar_professores(self) -> List[Professor]:
         print("[Serviço] Listando professores")

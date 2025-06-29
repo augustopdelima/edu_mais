@@ -7,6 +7,7 @@ from model.coordenador import Coordenador
 from model.professor import Professor
 from model.questao import Questao
 from service.formulario_service import FormularioService
+from util.validar_data import ValidarData
 from view.formulario_view import (
     exibir_formulario,
     listar_formularios,
@@ -47,3 +48,9 @@ class FormularioController:
         print(f"[Controlador] Deletando formulário ID {id}")
         self.formulario_service.remover_formulario(id)
         mostrar_mensagem_sucesso(f"Formulário ID {id} removido com sucesso!")
+
+    def publicar_formulario(self, id_formulario: int, data: str):
+        # validar data de publicação ou de agendamento
+        ValidarData(data).validar()
+        print(
+            f"O formulário identificado pelo id {id_formulario} sera agendado para a data {data} ")

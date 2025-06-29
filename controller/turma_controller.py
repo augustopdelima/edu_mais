@@ -1,3 +1,6 @@
+from model.usuario import Usuario
+from security.permissao import Permissao
+from security.validador_permissao import validar_permissao
 from service.turma_service import TurmaService
 from view.turma_view import (
     exibir_turma,
@@ -14,7 +17,10 @@ class TurmaController:
         print("[Controlador] Inicializando TurmaController")
         self.turma_service = turma_service
 
-    def cadastrar_turma(self, nome: str, ano: int, semestre: int, disciplina: Disciplina, alunos: list = None) -> None:
+    def cadastrar_turma(self, usuario: Usuario, nome: str, ano: int, semestre: int, disciplina: Disciplina, alunos: list = None) -> None:
+
+        validar_permissao(usuario, [Permissao.COORDENADOR])
+
         print("[Controlador] Cadastrando turma")
         turma = self.turma_service.cadastrar_turma(
             nome, ano, semestre, disciplina, alunos)

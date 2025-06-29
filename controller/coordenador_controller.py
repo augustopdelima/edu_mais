@@ -1,3 +1,6 @@
+from model.usuario import Usuario
+from security.permissao import Permissao
+from security.validador_permissao import validar_permissao
 from service.coordenador_service import CoordenadorService
 from view.coordenador_view import exibir_coordenador, listar_coordenadores, exibir_coordenador_nao_encontrado, mostrar_mensagem_sucesso, mostrar_mensagem_erro
 
@@ -7,7 +10,10 @@ class CoordenadorController:
         print("[Controlador] Inicializando CoordenadorController")
         self.coordenador_service = coordenador_service
 
-    def cadastrar_coordenador(self, nome: str, email: str, senha: str) -> None:
+    def cadastrar_coordenador(self, usuario: Usuario, nome: str, email: str, senha: str) -> None:
+
+        validar_permissao(usuario, [Permissao.COORDENADOR])
+
         print(f"[Controlador] Cadastrando coordenador: {nome}")
         coordenador = self.coordenador_service.cadastrar_coordenador(
             nome, email, senha)
@@ -38,7 +44,10 @@ class CoordenadorController:
         else:
             exibir_coordenador_nao_encontrado(id)
 
-    def deletar_coordenador(self, id: int) -> None:
+    def deletar_coordenador(self, usuario: Usuario, id: int) -> None:
+
+        validar_permissao(usuario, [Permissao.COORDENADOR])
+
         print(f"[Controlador] Deletando coordenador ID {id}")
         self.coordenador_service.remover_coordenador(id)
         mostrar_mensagem_sucesso(f"Coordenador ID {id} removido com sucesso!")

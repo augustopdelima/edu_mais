@@ -1,3 +1,6 @@
+from model.usuario import Usuario
+from security.permissao import Permissao
+from security.validador_permissao import validar_permissao
 from service.resposta_service import RespostaService
 from view.resposta_view import (
     exibir_resposta,
@@ -12,7 +15,10 @@ class RespostaController:
         print("[Controlador] Inicializando RespostaController")
         self.resposta_service = resposta_service
 
-    def cadastrar_resposta(self, formulario, resposta_texto: str) -> None:
+    def cadastrar_resposta(self, usuario: Usuario, formulario, resposta_texto: str) -> None:
+
+        validar_permissao(usuario, [Permissao.ALUNO])
+
         print("[Controlador] Cadastrando resposta")
         resposta = self.resposta_service.cadastrar_resposta(
             formulario, resposta_texto)
@@ -32,7 +38,10 @@ class RespostaController:
         else:
             exibir_resposta_nao_encontrada(id)
 
-    def deletar_resposta(self, id: int) -> None:
+    def deletar_resposta(self, usuario: Usuario, id: int) -> None:
+
+        validar_permissao(usuario, [Permissao.ALUNO])
+
         print(f"[Controlador] Deletando resposta ID {id}")
         self.resposta_service.deletar_resposta(id)
         mostrar_mensagem_sucesso(f"Resposta ID {id} deletada com sucesso!")

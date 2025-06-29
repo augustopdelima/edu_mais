@@ -1,11 +1,11 @@
 from controller.professor_controller import ProfessorController
 from model.aluno import Aluno
-from model.avaliacao import Avaliacao
+
 from model.disciplina import Disciplina
-from model.formulario import Formulario
+
 from model.professor import Professor
-from model.relatorio import Relatorio
-from model.resposta import Resposta
+
+from model.usuario import Usuario
 from repository.aluno_repository import AlunoRepository
 from repository.coordenador_repository import CoordenadorRepository
 from repository.disciplina_repository import DisciplinaRepository
@@ -13,6 +13,8 @@ from repository.professor_repository import ProfessorRepository
 from repository.turma_repository import TurmaRepository
 
 
+from security.permissao import Permissao
+from security.validador_permissao import validar_permissao
 from service.aluno_service import AlunoService
 from service.coordenador_service import CoordenadorService
 from service.disciplina_service import DisciplinaService
@@ -24,9 +26,8 @@ from controller.disciplina_controller import DisciplinaController
 from controller.turma_controller import TurmaController
 
 
-from model.coordenador import Coordenador
-from model.turma import Turma
-from model.questao import Questao
+USUARIO = Usuario(id=1, email='teste@gmail', nome='teste',
+                  permissao=Permissao.ALUNO, senha='1234')
 
 
 def menu_aluno():
@@ -35,7 +36,7 @@ def menu_aluno():
     controller = AlunoController(aluno_service)
 
     controller.cadastrar_aluno(
-        nome='Aluno Teste', email='aluno@teste.com', matricula='12234')
+        nome='Aluno Teste', usuario=USUARIO, email='aluno@teste.com', matricula='12234', senha='teste')
     controller.listar_alunos()
 
 
@@ -45,7 +46,7 @@ def menu_coordenador():
     controller = CoordenadorController(coord_service)
 
     controller.cadastrar_coordenador(
-        nome='Coord Teste', email='coord@teste.com')
+        nome='Coord Teste', usuario=USUARIO, email='coord@teste.com')
     controller.listar_coordenadores()
 
 
@@ -54,7 +55,7 @@ def menu_disciplina():
     disciplina_service = DisciplinaService(disciplina_repo)
     controller = DisciplinaController(disciplina_service)
 
-    controller.cadastrar_disciplina(nome='Disciplina Teste', descricao='Teste', professor=Professor(
+    controller.cadastrar_disciplina(usuario=USUARIO, nome='Disciplina Teste', descricao='Teste', professor=Professor(
         nome="João Silva", email="joao@edu.com", id=1), semestre='2')
     controller.listar_disciplinas()
 
@@ -65,6 +66,7 @@ def menu_turma():
     controller = TurmaController(turma_service)
 
     # Criando dados exemplo
+
     alunos = [
         Aluno(id=1, nome="Carlos Silva",
               email="carlos@teste.com", matricula="2024001"),
@@ -78,6 +80,7 @@ def menu_turma():
     controller.cadastrar_turma(
         nome="Turma A",
         ano=2025,
+        usuario=USUARIO,
         semestre=1,
         disciplina=disciplina,
         alunos=alunos
@@ -90,8 +93,11 @@ def menu_professor():
     controller = ProfessorController(professor_service)
 
     # Exemplos de uso:
-    controller.cadastrar_professor(nome='João Silva', email='joao@edu.com')
-    controller.cadastrar_professor(nome='Ana Lima', email='ana@edu.com')
+
+    controller.cadastrar_professor(
+        nome='João Silva', email='joao@edu.com', usuario=USUARIO, senha='teste')
+    controller.cadastrar_professor(
+        nome='Ana Lima', email='ana@edu.com', usuario=USUARIO, senha='teste')
 
     controller.listar_professores()
     controller.mostrar_professor_por_id(1)

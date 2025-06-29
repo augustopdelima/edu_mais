@@ -7,13 +7,14 @@ class AlunoService:
     def __init__(self, aluno_repository: AlunoRepository):
         self.aluno_repository = aluno_repository
 
-    def cadastrar_aluno(self, nome: str, email: str, matricula: str) -> Aluno:
+    def cadastrar_aluno(self, nome: str, email: str, senha: str, matricula: str) -> Aluno:
         print(f"Cadastrando aluno: {nome}, {email}, {matricula}")
         # Retornando objeto dummy
-        return Aluno(1, nome, email, matricula)
+        return Aluno(1, nome, email, senha, matricula)
 
-    def atualizar_aluno(self, id: int, nome: str, email: str, matricula: str) -> Optional[Aluno]:
-        print(f"Atualizando aluno ID {id} com: {nome}, {email}, {matricula}")
+    def atualizar_aluno(self, id: int, nome: str, email: str, senha: str, matricula: str) -> Optional[Aluno]:
+        print(
+            f"Atualizando aluno ID {id} com: {nome}, {email}, {senha} ,{matricula}")
         return None
 
     def listar_alunos(self) -> List[Aluno]:

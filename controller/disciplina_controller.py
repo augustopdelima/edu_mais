@@ -1,4 +1,7 @@
 from model.professor import Professor
+from model.usuario import Usuario
+from security.permissao import Permissao
+from security.validador_permissao import validar_permissao
 from service.disciplina_service import DisciplinaService
 from view.disciplina_view import (
     exibir_disciplina,
@@ -13,7 +16,10 @@ class DisciplinaController:
         print("[Controlador] Inicializando DisciplinaController")
         self.disciplina_service = disciplina_service
 
-    def cadastrar_disciplina(self, nome: str, semestre: str, descricao: str, professor: Professor) -> None:
+    def cadastrar_disciplina(self, usuario: Usuario, nome: str, semestre: str, descricao: str, professor: Professor) -> None:
+
+        validar_permissao(usuario, [Permissao.COORDENADOR])
+
         print(f"[Controlador] Cadastrando disciplina: {nome}")
         disciplina = self.disciplina_service.cadastrar_disciplina(
             nome, semestre, descricao, professor)
@@ -33,7 +39,10 @@ class DisciplinaController:
         else:
             exibir_disciplina_nao_encontrada(id)
 
-    def deletar_disciplina(self, id: int) -> None:
+    def deletar_disciplina(self, usuario: Usuario, id: int) -> None:
+
+        validar_permissao(usuario, [Permissao.COORDENADOR])
+
         print(f"[Controlador] Deletando disciplina ID {id}")
         self.disciplina_service.remover_disciplina(id)
         mostrar_mensagem_sucesso(f"Disciplina ID {id} removida com sucesso!")
