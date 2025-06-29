@@ -1,5 +1,3 @@
-from typing import Optional
-from model.professor import Professor
 from service.professor_service import ProfessorService
 from view.professor_view import (
     exibir_professor,

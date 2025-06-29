@@ -1,5 +1,3 @@
-from typing import Optional
-from model.resposta import Resposta
 from service.resposta_service import RespostaService
 from view.resposta_view import (
     exibir_resposta,

@@ -1,6 +1,3 @@
-# controller/disciplina_controller.py
-from typing import Optional
-from model.disciplina import Disciplina
 from model.professor import Professor
 from service.disciplina_service import DisciplinaService
 from view.disciplina_view import (

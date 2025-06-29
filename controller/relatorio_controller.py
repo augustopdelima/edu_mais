@@ -1,4 +1,3 @@
-from typing import Optional
 from model.formulario import Formulario
 from service.relatorio_service import RelatorioService
 from view.relatorio_view import (
