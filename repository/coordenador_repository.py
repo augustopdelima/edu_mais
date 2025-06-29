@@ -1,28 +1,23 @@
+from model.coordenador import Coordenador  # ajuste conforme seu projeto
 from typing import List, Optional
-from model.coordenador import Coordenador
 
 
 class CoordenadorRepository:
-
     def __init__(self):
-        self.coordenadores = list[Coordenador]
+        self.coordenadores: List[Coordenador] = []
+        print("[CoordenadorRepository] Inicializado")
 
     def salvar(self, coordenador: Coordenador) -> None:
-        """Salva um novo coordenador ou atualiza um existente."""
-        pass
+        print(
+            f"[CoordenadorRepository] Salvando coordenador: {coordenador.nome}")
 
     def listar_todos(self) -> List[Coordenador]:
-        """Retorna todos coordenadores cadastrados."""
-        pass
+        print("[CoordenadorRepository] Listando todos os coordenadores")
+        return []
 
     def buscar_por_id(self, id: int) -> Optional[Coordenador]:
-        """Busca coordenador pelo ID."""
-        pass
-
-    def buscar_por_email(self, email: str) -> Optional[Coordenador]:
-        """Busca coordenador pelo email (útil para login)."""
-        pass
+        print(f"[CoordenadorRepository] Buscando coordenador pelo ID: {id}")
+        return None
 
     def deletar(self, id: int) -> None:
-        """Deleta coordenador pelo ID."""
-        pass
+        print(f"[CoordenadorRepository] Deletando coordenador com ID: {id}")

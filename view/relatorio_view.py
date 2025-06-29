@@ -8,6 +8,7 @@ def exibir_relatorio(relatorio: Relatorio) -> None:
     print(f"ID: {relatorio.id}")
     print(f"Indicadores: {relatorio.indicadores}")
     print(f"Gráficos: {relatorio.graficos}")
+    print(f"Formulário relacionado: {relatorio.formulario}")
     print("=============================\n")
 
 

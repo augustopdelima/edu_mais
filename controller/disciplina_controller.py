@@ -8,7 +8,6 @@ from view.disciplina_view import (
     listar_disciplinas,
     exibir_disciplina_nao_encontrada,
     mostrar_mensagem_sucesso,
-    mostrar_mensagem_erro,
 )
 
 

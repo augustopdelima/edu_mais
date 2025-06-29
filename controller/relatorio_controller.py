@@ -1,12 +1,11 @@
 from typing import Optional
-from model.relatorio import Relatorio
+from model.formulario import Formulario
 from service.relatorio_service import RelatorioService
 from view.relatorio_view import (
     exibir_relatorio,
     listar_relatorios,
     exibir_relatorio_nao_encontrado,
     mostrar_mensagem_sucesso,
-    mostrar_mensagem_erro,
 )
 
 
@@ -15,10 +14,10 @@ class RelatorioController:
         print("[Controlador] Inicializando RelatorioController")
         self.relatorio_service = relatorio_service
 
-    def criar_relatorio(self, indicadores: str, graficos: str) -> None:
+    def criar_relatorio(self, indicadores: str, graficos: str, formulario: Formulario) -> None:
         print("[Controlador] Criando relatório")
         relatorio = self.relatorio_service.criar_relatorio(
-            indicadores, graficos)
+            indicadores, graficos, formulario)
         mostrar_mensagem_sucesso(
             f"Relatório ID {relatorio.id} criado com sucesso!")
 

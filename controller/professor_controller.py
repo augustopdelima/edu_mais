@@ -6,7 +6,6 @@ from view.professor_view import (
     listar_professores,
     exibir_professor_nao_encontrado,
     mostrar_mensagem_sucesso,
-    mostrar_mensagem_erro,
 )
 
 

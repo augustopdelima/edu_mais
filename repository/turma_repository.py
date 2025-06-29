@@ -12,11 +12,6 @@ class TurmaRepository:
 
     def listar_todos(self) -> List[Turma]:
         print("[Repositório] Listando todas as turmas")
-        return self.turmas
 
     def buscar_por_id(self, id: int) -> Optional[Turma]:
         print(f"[Repositório] Buscando turma pelo ID {id}")
-        for turma in self.turmas:
-            if turma.id == id:
-                return turma
-        return None

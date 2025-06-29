@@ -7,7 +7,6 @@ from view.questao_view import (
     listar_questoes,
     exibir_questao_nao_encontrada,
     mostrar_mensagem_sucesso,
-    mostrar_mensagem_erro,
 )
 
 

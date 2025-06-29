@@ -1,6 +1,3 @@
-# controller/aluno_controller.py
-from typing import Optional
-from model.aluno import Aluno
 from service.aluno_service import AlunoService
 from view.aluno_view import exibir_aluno, listar_alunos, exibir_aluno_nao_encontrado, mostrar_mensagem_sucesso, mostrar_mensagem_erro
 

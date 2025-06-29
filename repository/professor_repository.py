@@ -16,11 +16,6 @@ class ProfessorRepository:
 
     def buscar_por_id(self, id: int) -> Optional[Professor]:
         print(f"[Repositório] Buscando professor pelo ID: {id}")
-        for prof in self.professores:
-            if prof.id == id:
-                return prof
-        return None
 
     def remover(self, id: int) -> None:
         print(f"[Repositório] Removendo professor com ID: {id}")
-        self.professores = [prof for prof in self.professores if prof.id != id]
